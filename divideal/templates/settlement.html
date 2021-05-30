@@ -1,0 +1,19 @@
+{% extends 'Gbase.html' %}
+{% set active_page = "settlement" %}
+{% block content %}
+	<div class="xyz">
+		{% for entry in settlement %}
+		  <div class="card h-100 w-100" style="border: solid 1px black; border-right: solid 5px orange;">
+         	<div class="card-body">
+            	<h5 class="card-title pd-5">
+                Receiver : {{ entry[3]}}
+            	</h5>
+      			<p class="card-text pd-5">
+        		 Payee: {{entry[1]}}<br>
+        		 Amount: {{"%.2f"|format(entry[2])}}
+      			</p>
+    	    </div>
+    	  </div>  
+    	{% endfor %}
+    </div>
+ {% endblock %}

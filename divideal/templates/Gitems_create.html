@@ -1,0 +1,233 @@
+{% extends 'Gbase.html' %} 
+{% set active_page = "items" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/Gitems_create.css')}}" />
+{% endblock %}
+
+
+{% block content %}
+      <div class="user_details">
+        <form>
+          <div class="first__details">
+            <div class="mb-3">
+              <label class="form-label" for="exampleCheck1"
+                ><b>Item Description</b></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="exampleCheck1"
+                placeholder="Enter Description"
+				name="description"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                ><b>Date of Creation</b></label
+              >
+              <input
+                type="date"
+                class="form-control"
+                id="exampleInputPassword1"
+                placeholder="Enter Date"
+				name="date"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="InputAmount" class="form-label"><b>Amount</b></label>
+              <input
+                type="number"
+                class="form-control"
+                id="InputAmount"
+                placeholder="Enter Amount in Rupees"
+				name="amount"
+                required
+                onchange="Checkvalue()"
+              />
+            </div>
+          </div>
+          <div class="final__details">
+            <p><b>Select the payer</b></p>
+			{% for payer in participants %}
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="payerName"
+				value='{{ payer[0] }}'
+                id="flexRadioDefault1"
+              />
+              <label class="form-check-label" for="payerName"> {{ payer[0] }} </label>
+            </div>
+			{% endfor %}
+          </div>
+
+          <div class="final__details">
+            <div class="splits">
+              <div class="tab">
+                <p style="text-align: center"><b>Select the Expense type</b></p>
+                <div class="menu">
+                  <span
+                    class="tablinks active"
+                    onclick="openmenu(event,'EQUAL')"
+                    >Equal</span
+                  >
+                  <span class="tablinks" onclick="openmenu(event,'PERCENT')"
+                    >Percent</span
+                  >
+                  <span class="tablinks" onclick="openmenu(event,'SHARES')"
+                    >Splits</span
+                  >
+                  <span class="tablinks" onclick="openmenu(event,'ADJUST')"
+                    >Adjust</span
+                  >
+                  <span class="tablinks" onclick="openmenu(event,'EXACT')"
+                    >Exact</span
+                  >
+                </div>
+              </div>
+              <div id="EQUAL" class="tabcontent">
+                <div class="checkbox-1">
+                  <div class="col1">
+                    <p><strong>Participant Name</strong></p>
+                  </div>
+                  <div class="col2">
+                    <p><strong>Amount</strong></p>
+                  </div>
+                </div>
+                <div class="checkbox-1">
+                  <div class="col1">
+                    <label>
+                      <input type="checkbox" class="check" name="consumer[]" value="suchith" checked /> Suchith
+                    </label>
+                  </div>
+                  <div class="col2">
+                    <p>1000</p>
+                  </div>
+                </div>
+
+                <div class="checkbox-1">
+                  <div class="col1">
+                    <label>
+                      <input type="checkbox" class="check" name="consumer[]" value="Karthik" checked /> Karthik
+                    </label>
+                  </div>
+                  <div class="col2">
+                    <p>1000</p>
+                  </div>
+                </div>
+                <div class="checkbox-1">
+                  <div class="col1">
+                    <label>
+                      <input type="checkbox" class="check" name="consumer[]" value="Sahaja" checked /> Sahaja
+                    </label>
+                  </div>
+                  <div class="col2">
+                    <p>1000</p>
+                  </div>
+                </div>
+              </div>
+              <div id="PERCENT" class="tabcontent">
+                <div class="checkbox-2">
+                  <div class="col1">
+                    <p><strong>Participant Name</strong></p>
+                  </div>
+                  <div class="col2">
+                    <p><strong>Percentage</strong></p>
+                  </div>
+                  <div class="col3">
+                    <p><strong>Amount</strong></p>
+                  </div>
+                </div>
+                <div class="checkbox-2">
+                  <div class="col1">
+                    <label>
+                      <input type="checkbox" class="check" name="consumer[]" value="Suchith" checked /> Suchith
+                    </label>
+                  </div>
+                  <div class="col2">
+                    <input type="number" value="33.33" style="width: 60px" />
+                  </div>
+                  <div class="col3">
+                    <p>1000</p>
+                  </div>
+                </div>
+
+                <div class="checkbox-2">
+                  <div class="col1">
+                    <label>
+                      <input type="checkbox" name="consumer[]" value="karthik" class="check" checked /> Karthik
+                    </label>
+                  </div>
+                  <div class="col2">
+                    <input type="number" value="33.33" style="width: 60px" />
+                  </div>
+                  <div class="col3">
+                    <p>1000</p>
+                  </div>
+                </div>
+                <div class="checkbox-2">
+                  <div class="col1">
+                    <label>
+                      <input type="checkbox" class="check" name="consumer[]" value="sahaja" checked /> Sahaja
+                    </label>
+                  </div>
+                  <div class="col2">
+                    <input type="number" value="33.33" style="width: 60px" />
+                  </div>
+                  <div class="col3">
+                    <p>1000</p>
+                  </div>
+                </div>
+              </div>
+
+              <div id="EXACT" class="tabcontent">
+                <h3>EXACT</h3>
+                <p>Tokyo is the capital of Japan.</p>
+              </div>
+              <div id="SHARES" class="tabcontent">
+                <h3>SHARES</h3>
+                <p>Paris is the capital of France.</p>
+              </div>
+
+              <div id="ADJUST" class="tabcontent">
+                <h3>ADJUST</h3>
+                <p>Tokyo is the capital of Japan.</p>
+              </div>
+            </div>
+
+			
+            <button type="button" class="btn btn-success" name="saveitem" value="save">
+              <strong>Save</strong>
+            </button>
+          </div>
+        </form>
+      </div>
+    <script>
+      function openmenu(evt, menuName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(menuName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+
+      function Checkvalue() {
+        amount = document.getElementById("InputAmount");
+        if (amount.value.length != 0) {
+          var vals = document.getElementsByClassName("final__details");
+          for (let i = 0; i < vals.length; i++) {
+            vals[i].style.display = "block";
+          }
+        }
+      }
+    </script>
+  {% endblock %}

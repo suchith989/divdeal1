@@ -1,0 +1,102 @@
+{% extends 'Gbase.html' %} 
+{% set active_page = "items" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/Gitems_create.css')}}" />
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="hero">
+        <div class="user_details">
+            <form method="post">
+                <div class="first__details">
+                    <div class="mb-3">
+                        <label class="form-label" for="exampleCheck1"><b>Item Description</b></label>
+                        <input type="text" class="form-control" name="description" placeholder="Enter Description"
+                            required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label"><b>Date of Creation</b></label>
+                        <input type="date" class="form-control" id="date" name="today_date" placeholder="Enter Date"
+                            required />
+                    </div>
+                    <div class="mb-3">
+                        <label for="InputAmount" class="form-label"><b>Amount</b></label>
+                        <input type="number" class="form-control" id="InputAmount" name="amount" placeholder="Enter Amount in Rupees"
+                            required onchange="Checkvalue()" autocomplete="off"/>
+                    </div>
+                </div>
+                <div class="final__details">
+                    <p><b>Select the payer</b></p>
+					{% for participant in participant_names %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="payerName" value="{{ participant[0]}}" id="flexRadioDefault1" checked />
+                        <label class="form-check-label" for="payerName">{{ participant[0] }} </label>
+                    </div>
+					{% endfor %}
+                
+                <div class="final__details">
+                    <div class="splits">
+                        <div class="tab">
+                            <p style="text-align: center"><b>Select the Expense type</b></p>
+                            <div class="menu">
+                                <span class="tablinks active" onclick="openmenu(event,'EQUAL')">Equal</span>
+                                <span class="tablinks" onclick="openmenu(event,'PERCENT')">Percent</span>
+                                <span class="tablinks" onclick="openmenu(event,'SHARES')">Shares</span>
+                                <span class="tablinks" onclick="openmenu(event,'ADJUST')">Adjust</span>
+                                <span class="tablinks" onclick="openmenu(event,'EXACT')">Exact</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="participants" class="final__details">
+                    <div class="checkbox-1">
+                        <div class="col1">
+                          <p>Consumers</p>
+                        </div>
+                        <div class="col2" style="display: none;">
+                          <p>Value</p>
+                        </div>
+                        <div class="col3">
+                          <p>Amount</p>
+                        </div>
+                      </div>
+					  
+					{% for participant in participant_names %}
+                    <div class="checkbox-1 top checked">
+                        <div class="col1">
+                          <label>
+                            <input type="checkbox" class="check" name="consumer_name" value="{{ participant[0]}}" onchange="changed(event)" checked /> {{ participant[0]}}
+                          </label>
+                        </div>
+                        <div class="col2" style="display: none;">
+                          <input type="number" name="coltwo" value="" class="modify" step="any">
+                        </div>
+                        <div class="col3">
+                          <input type="number" name="consumer_amount" class="split_value0" readonly>
+                        </div>
+                   </div>
+				   {% endfor %}
+				   </div>
+	
+				<div class="final__details">
+				<div class="allbtns">
+					<a href="{{ url_for('pool_items',pool_link=pool_link) }}"><button type="button" class="btn btn-outline-success" name="submit-btn" value="back"><strong>Back</strong></button></a>
+					<button type="submit" class="btn btn-success" name="submit-btn" value="save"><strong>Save</strong></button>
+					
+				</div>
+				</div>
+				<input type="hidden" id="expensetype" name="expense" value="EQUAL" />
+            </form>
+            <div id="message">
+              <p></p>
+            </div>
+        </div>
+	</div>
+	</div>
+
+        <script src="{{url_for('static',filename='js/items.js')}}"></script>
+
+  {% endblock %}

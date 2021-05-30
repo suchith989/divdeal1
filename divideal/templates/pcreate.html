@@ -1,0 +1,25 @@
+{% extends 'Gbase.html' %}
+<!-- using settlement just to make sure plus button is not visible - check base html for more understanding  -->
+{% set active_page = "settlement" %}
+{% block content %}
+	<div class="hero" style="margin-left: 5%;margin-right: 5%">
+            <form method="post">
+				<br>
+				<h4><b>New pool member</b></h4>
+				<br>
+				<div class="mb-3">
+                    <label class="form-label" for="exampleCheck1"><b>First Name</b></label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"><b>Email address</b></label>
+					<input type="email" class="form-control" name="email"aria-describedby="emailHelp" placeholder="Enter email" required>
+                </div>
+				<div class="allbtns">
+					<a href="{{ url_for('pool_dashboard',pool_link=pool_link) }}"><button type="button" class="btn btn-outline-success" name="submit-btn" value="back"><strong>Back</strong></button></a>
+					<button type="submit" class="btn btn-success" name="submit-btn" value="save"><strong>Save</strong></button>
+					<button type="submit" class="btn btn-success" name="submit-btn" value="add-another"><strong>Save and add other member</strong></button>
+				</div>
+            </form>
+    </div>
+{% endblock %}

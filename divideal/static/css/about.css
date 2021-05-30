@@ -1,0 +1,80 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+.body1{
+ 
+  font-family: "Poppins", sans-serif;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  margin-top: 110px;
+}
+body{
+	 background-color: #eee;
+}
+
+.grid {
+  display: grid;
+  width: 100%;
+  grid-gap: 6rem;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  align-items: start;
+}
+
+.grid-item {
+	  background-color: #fff;
+	  border-radius: 25px;
+	  transform: rotate3d(3, 20, 0, 22deg);
+	   transform-style: preserve-3d;
+	   transform-origin: center;
+	  overflow: hidden;
+	  border: 5px solid grey;
+	  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
+	  cursor: pointer;
+	  transition: 0.3s;
+}
+
+.grid-item:hover {
+  transform: translateY(-0.5%);
+  box-shadow: 0 4rem 8rem rgba(0, 0, 0, 0.8);
+}
+.card{
+	height:100%;
+}
+.card-content {
+  padding: 3rem;
+}
+
+.card-header {
+  font-size: 3rem;
+  font-weight: 500;
+  color: #0d0d0d;
+  margin-bottom: 1.5rem;
+}
+
+.card-text {
+  font-size: 1.6rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.7;
+  color: #3d3d3d;
+  margin-bottom: 2.5rem;
+}
+
+@media only screen and (max-width: 60em) {
+  .body1 {
+    padding: 3rem;
+  }
+
+  .grid {
+    grid-gap: 3rem;
+  }
+}

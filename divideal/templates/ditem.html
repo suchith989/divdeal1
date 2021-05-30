@@ -1,0 +1,85 @@
+{% extends 'Gbase.html' %} 
+{% set active_page = "items" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/Gitem_display.css')}}" />
+{% endblock %}
+
+{% block content %}
+      <div class="user_details">
+        <form>
+          <div class="first__details">
+            <div class="mb-3">
+              <label class="form-label" for="exampleCheck1"
+                ><b>Item Description</b></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="exampleCheck1"
+				value="{{item[0]}}"
+                readonly
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                ><b>Date of Creation</b></label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputPassword1"
+                value="{{item[1]}}"
+                readonly
+              />
+            </div>
+            <div class="mb-3">
+              <label for="InputAmount" class="form-label"><b>Amount</b></label>
+              <input
+                type="number"
+                class="form-control"
+                id="InputAmount"
+                value="{{item[2]}}"
+                readonly
+              />
+            </div>
+          </div>
+          <div class="final__details">
+            <p><b>Select the payer</b></p>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="payerName"
+				value="{{item[3]}}"
+                id="flexRadioDefault1"
+				checked
+              />
+              <label class="form-check-label" for="payerName" > {{ item[3] }} </label>
+            </div>
+          </div>
+
+          <div class="final__details">
+            <div class="splits">
+			<p><b>Consumers</b></p>
+              <div class="tab">
+				{% for consumer in consumers %}
+                  <div class="checkbox-1">
+                  <div class="col1">
+					  <div class="form-check">
+						  <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
+						  <label for="flexCheckCheckedDisabled"> {{ consumer[0] }}
+						  </label>
+					  </div>
+                  </div>
+                  <div class="col2">
+                    <p> {{ consumer[1] }} </p>
+                  </div>
+                </div>
+				{% endfor %}
+          </div>
+		  <a href="{{ url_for('pool_items',pool_link=pool_link) }}"><button type="button" class="btn btn-outline-success" name="submit-btn" value="back"><strong>Back</strong></button></a>
+		  </div>
+		  </div>
+        </form>
+      </div>
+ {% endblock %}

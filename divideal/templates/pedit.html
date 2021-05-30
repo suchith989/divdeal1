@@ -1,0 +1,23 @@
+{% extends 'Gbase.html' %}
+{% set active_page = "participants" %}
+{% block content %}
+	<div class="hero" style="margin-left: 5%;margin-right: 5%">
+            <form method="post">
+				<br>
+				<h4><b>Edit pool member</b></h4>
+				<br>
+				<div class="mb-3">
+                    <label class="form-label" for="exampleCheck1"><b>First Name</b></label>
+                    <input type="text" name="name" class="form-control" id="exampleCheck1" value= "{{ participant[0] }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"><b>Email address</b></label>
+					<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value= "{{  participant[1] }}" required>
+                </div>
+				<div class="allbtns" style="text-align: right">
+					<button type="button" class="btn btn-outline-success"><strong>Back</strong></button>
+					<button type="submit" class="btn btn-success"><strong>Save</strong></button>
+				</div>
+            </form>
+    </div>
+ {% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Go Dutch</title>
+    <script
+      src="https://kit.fontawesome.com/7f3903742b.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Gnew_base.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Gtiles.css')}}">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+	{% block css %}
+	
+	{% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <span class="title">Go Dutch</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="sidebar">
+      <a href="{{ url_for('pool_dashboard',pool_link=pool_link) }}" class="nav__link {{ 'highlight' if active_page == 'participants' else '' }}">
+        <i class="fas fa-users fa-lg"></i>
+        <span class="nav__text">Participants</span>
+      </a>
+      <a href="{{ url_for('pool_items',pool_link=pool_link) }}" class="nav__link {{ 'highlight' if active_page == 'items' else '' }}">
+        <i class="fas fa-th-list fa-lg"></i>
+        <span class="nav__text">Items</span>
+      </a>
+      <a href="{{ url_for('pool_settlement',pool_link=pool_link) }}" class="nav__link {{ 'highlight' if active_page == 'settlement' else '' }}">
+        <i class="fas fa-piggy-bank fa-lg"></i>
+        <span class="nav__text">Settlement</span>
+      </a>
+      <a href="{{ url_for('about_page') }}" class="nav__link {{ 'highlight' if active_page == 'about' else '' }}" id="about">
+        <i class="fas fa-code"></i>
+        <span class="nav__text">About</span>
+      </a>
+    </div>
+    <div class="content">
+      {% block content %}
+
+      {% endblock %}
+   </div>
+  </body>
+</html>

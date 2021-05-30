@@ -1,0 +1,140 @@
+    /* html, body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 15px;
+} */
+
+.title{
+    font-size: x-large;
+}
+.user_details {
+    background-color: #c9d3db;
+    /* position: absolute; */
+    border: 5px solid #f1f1f1;
+    /* width: 30vw; */
+    /* height: 80vh; */
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 10px 10px 5px rgb(70, 67, 67);
+    border-radius: 9px;
+    width: 60%;
+    height: auto;
+    padding: 20px;
+}
+.demo{
+    justify-content: center;
+}
+
+label{
+    padding: 20px 18px 15px 0;
+    display: inline-block;
+}
+input[type=email], input[type=Password],input[type=text] {
+
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: 6px 5px 5px rgba(114, 109, 109, 0.678);
+}
+.button{
+    /* margin: 5px; */
+    background-color: #302f3d;
+    color: white;
+    padding: 12px 0;
+    margin: 10px auto;
+    border: none;
+    width: 48%;
+    border-radius: 20px;
+    justify-content: center;
+    display: flex;
+}
+
+
+.icon {
+    background: url('your-image-url.jpg');
+    height: 20px;
+    width: 20px;
+    display: block;
+    /* Other styles here */
+}
+
+
+label{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: medium;
+    padding-left: 10px; 
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+    font-size: 18;
+}
+
+.button:hover {
+    background-color: #ffff;
+    color: black;
+    opacity: 0.8;
+}
+
+span.psw {
+    float: right;
+    padding-top: 0;
+    padding-right: 15px;
+}
+
+#pic{
+    width: 100%;
+    height: 100%;
+}
+.hero{
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1.15fr 1fr;
+}
+
+/* Change styles for span on extra small screens */
+
+@media screen and (max-width: 1100px) {
+    .demo {
+       display: block;
+    }
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .user_details {
+        width: 50%;
+        height: auto;
+        /* position: absolute; */
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hero{
+        display: block;
+    }
+
+}
+@media screen and (max-width: 500px){
+    .demo {
+        display: block;
+     }
+     span.psw {
+         display: block;
+         float: none;
+     }
+     .user_details {
+         width: 80%;
+         height: auto;
+         /* position: absolute; */
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+     }
+     .hero{
+         display: block;
+     }
+}

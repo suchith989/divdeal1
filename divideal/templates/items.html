@@ -1,0 +1,32 @@
+{% extends 'Gbase.html' %} 
+{% set active_page = "items" %}
+
+
+{% block content %}
+<div class="xyz">
+
+ {% for item in items %}
+   <div class="card h-100 w-100">
+         <div class="card-body">
+            <h5 class="card-title pd-5">
+                {{ item[2]}}
+            </h5>
+			<h6 class="card-subtitle mb-2 text-muted pd-5">
+				{{ item[3] }}
+			</h6>
+			<p class="card-text pd-5">
+				Paid: {{ item[5] }}<br />
+				Amount: {{ item[4] }}<br />
+				No_of_consumers:{{item[6] }}<br />
+			</p>
+    
+    </div>
+	    <div class="view">
+      <a href="{{ url_for('display_item',pool_link=pool_link, item_id=item[0]) }}"><i class="fas fa-info"></i></a>
+      <a href="{{ url_for('edit_item',pool_link=pool_link, item_id=item[0]) }}"><i class="far fa-edit"></i></a>
+    </div>
+   </div>
+   {% endfor %} 
+ </div>
+ <a href="{{url_for('add_item',pool_link = pool_link)}}"class="plus-button "></a>
+{% endblock %}

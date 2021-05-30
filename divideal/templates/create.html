@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/create.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            <span class="title">Go Dutch</span>
+          </a>
+        </div>
+      </nav>
+    <div class="hero">
+        <div class="demo">
+            <img src="{{ url_for('static', filename='network.jpg')}}" id="pic">
+        </div>
+        <div class="user_details">
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label" for="exampleCheck1">Pool Name</label>
+                    <input type="text" class="form-control" id="exampleCheck1" name="poolname" placeholder ="Enter Pool name" value ="{{ request.form['poolname'] }}" required>
+                  
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" name="username" placeholder = "Enter Pool member name"
+                    value="{{ request.form['username'] }}" >
+                  </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter your email id" value="{{ request.form['email'] }}">
+                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+               <button type="submit" class="button"><strong>Submit</strong></button>
+              </form>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

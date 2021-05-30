@@ -1,0 +1,144 @@
+{% extends 'Gbase.html' %}
+{% set active_page = "items" %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/edit_item.css')}}" />
+{% endblock %}
+
+{% block content %}
+        <div class="user_details">
+            <form method="post">
+                <div class="first__details">
+                    <div class="mb-3">
+						<label class="form-label" for="exampleCheck1"><b>Item Description</b></label>
+						<input type="text" name="description" class="form-control" id="exampleCheck1" value= "{{ item[0] }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="exampleCheck1"><b>Date of Creation</b></label>
+						<input type="text" name="date" class="form-control" id="date" value= "{{ item[1] }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="InputAmount" class="form-label"><b>Amount</b></label>
+                       <input type="number" name="amount" class="form-control" id="InputAmount" value="{{ item[2] }}" onchange="make_equal()" required />
+                    </div>
+                </div>
+                <div class="final__details">
+                    <p><b>Select the payer</b></p>
+					<br>
+					<div class="form-check">
+                        <input class="form-check-input" type="radio" name="payerName" value="{{ item[3]}}" id="flexRadioDefault1" checked />
+                        <label class="form-check-label" for="payerName">{{ item[3] }} </label>
+                    </div>
+					{% for excludep in excludedp %}
+					<br/>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="payerName" value="{{ excludep}}" id="flexRadioDefault1"  />
+                        <label class="form-check-label" for="payerName">{{ excludep }} </label>
+                    </div>
+					{% endfor %}
+					<br/>
+				</div>
+				
+                <div class="final__details">
+                    <div class="splits">
+                        <div class="tab">
+                            <p style="text-align: center"><b>Select the Expense type</b></p>
+                            <div class="menu">
+							   <span class="tablinks {{ 'active' if expense_type =='EQUAL' else ' '}}" onclick="openmenu(event,'EQUAL')"  >Equal</span>
+							   <span class="tablinks {{ 'active' if expense_type =='PERCENT' else ' '}}" onclick="openmenu(event,'PERCENT')" >Percent</span>
+							   <span class="tablinks {{ 'active' if expense_type =='SHARES' else ' '}}" onclick="openmenu(event,'SHARES')" >Shares</span>
+							   <span class="tablinks {{ 'active' if expense_type =='ADJUST' else ' '}}" onclick="openmenu(event,'ADJUST')" >Adjust</span>
+							   <span class="tablinks {{ 'active' if expense_type =='EXACT' else ' '}}" onclick="openmenu(event,'EXACT')" >Exact</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="participants" class="final__details">
+                    <div class="checkbox-1">
+                        <div class="col1">
+                          <p>Consumers</p>
+                        </div>
+                        <div class="col2" style="display: none;">
+                          <p>Value</p>
+                        </div>
+                        <div class="col3">
+                          <p>Amount</p>
+                        </div>
+                      </div>
+					  
+					{% for i in range(0, consumer|length ) %}
+                    <div class="checkbox-1 top checked">
+                        <div class="col1">
+                          <label>
+                            <input type="checkbox" class="check" name="consumer_name" value="{{ consumer[i] }}" onchange="changed(event)" checked /> {{ consumer[i] }}
+                          </label>
+                        </div>
+						{% if expense_type=='EQUAL' or expense_type=='EXACT' %}
+							<div class="col2" style="display: none;">
+							  <input type="number" name='coltwo' step='any' value="0" class="modify">
+							</div>
+						{% elif expense_type=='PERCENT' or expense_type=='SHARES' or expense_type=='ADJUST' %}
+							<div class="col2" style="display: block;">
+							  <input type="number" name='coltwo' step='any' value="{{col2_values[i][0]}}" class="modify">
+							</div>
+						{% endif %}
+						
+						{% if expense_type=='EXACT' %}
+                        <div class="col3">
+                          <input type="number" name="consumer_amount" step='any' class="split_value0" value="{{ consumers[i][1] }}" >
+                        </div>
+						{% else %}
+						 <div class="col3">
+                          <input type="number" name="consumer_amount" step='any' class="split_value0" value="{{ consumers[i][1] }}" readonly >
+                        </div>
+						{% endif %}
+                   </div>
+				   {% endfor %}
+				   {% for nc in notconsumer %}
+                    <div class="checkbox-1 bottom unchecked">
+                        <div class="col1">
+                          <label>
+                            <input type="checkbox" class="check" name="consumer_name" value="{{nc}}" onchange="changed(event)"  /> {{ nc }}
+                          </label>
+                        </div>
+                        {% if expense_type=='EQUAL' or expense_type=='EXACT' %}
+							<div class="col2" style="display: none;">
+							  <input type="number" name='coltwo' step='any'  value="0" class="modify">
+							</div>
+						{% elif expense_type=='PERCENT' or expense_type=='SHARES' or expense_type=='ADJUST' %}
+							<div class="col2" style="display: block;">
+							  <input type="number" name='coltwo' step='any'  value="0" class="modify">
+							</div>
+						{% endif %}
+						
+                        {% if expense_type=='EXACT' %}
+                        <div class="col3">
+                          <input type="number" name="consumer_amount" class="split_value0" value="0" >
+                        </div>
+						{% else %}
+						 <div class="col3">
+                          <input type="number" name="consumer_amount" class="split_value0" value="0" readonly >
+                        </div>
+						{% endif %}
+                   </div>
+				   {% endfor %}
+				   </div>
+	
+				
+				<div class="allbtns">
+					<a href="{{ url_for('pool_items',pool_link=pool_link) }}"><button type="button" class="btn btn-outline-success" name="submit-btn" value="back"><strong>Back</strong></button></a>
+					<button type="submit" class="btn btn-success" name="submit-btn" value="save"><strong>Save</strong></button>
+					
+				</div>
+			<input type="hidden" id="expensetype" name="expense" value="{{ expense_type }}"/>
+            </form>
+            <div id="message">
+              <p></p>
+            </div>
+        </div>
+	</div>
+	</div>
+
+        <script src="{{url_for('static',filename='js/items.js')}}"></script>
+
+  {% endblock %}
